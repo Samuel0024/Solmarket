@@ -11,7 +11,6 @@ import { encSave, encLoad, setAdminCodeHash, sha256hex } from "../lib/storage";
 
 export const dynamic = 'force-dynamic';
 
-
 // ─── SOL Price Hook ────────────────────────────────────────────
 function useSolPrice() {
   const [priceNGN, setPriceNGN] = useState(null);
