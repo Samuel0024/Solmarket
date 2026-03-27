@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback, useRef } from "react";
-import { useWallet, useConnection } from "@solana/wallet-adapter-react";
-import { PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL } from "@solana/web3.js";
-import {
+export const dynamic = 'force-dynamic';
+import { useState, useEffect, useCallback, useRe...
+import { useWallet, useConnection } from "@solan...
+import { PublicKey, Transaction, SystemProgram...
   SUPER_ADMIN_WALLET, PLATFORM_WALLET, PRIMARY, ACCENT, ORANGE, RED,
   DARK, MUTED, BORDER_C, WHITE, SOL_GRAD,
   fmtN, fmtSOL, stars, shortAddr, genTrackId, genTxHash,
