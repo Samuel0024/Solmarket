@@ -7,6 +7,8 @@ const nextConfig = {
       fs: false,
       net: false,
       tls: false,
+      "rpc-websockets": false,
+      "rpc-websockets/dist/lib/client": false,
     };
     return config;
   },
