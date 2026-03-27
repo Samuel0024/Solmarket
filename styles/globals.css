@@ -1,1 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap');
 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --primary: #9945FF;
+  --accent: #14F195;
+  --orange: #FF6B00;
+  --red: #E8001C;
+  --bg: #F5F5F5;
+  --white: #FFFFFF;
+  --dark: #1A1A1A;
+  --muted: #888;
+  --border: #E8E8E8;
+  --sol-grad: linear-gradient(135deg,#9945FF 0%,#14F195 100%);
+}
+
+html, body { height: 100%; overscroll-behavior: none; }
+
+body {
+  background: #111;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'DM Sans', sans-serif;
+}
+
+::-webkit-scrollbar { width: 0; height: 0; }
+
+/* ── Keyframes ── */
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes slideUp { from { transform: translateY(80px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes slideDown { from { transform: translateX(-50%) translateY(-16px); opacity: 0; } to { transform: translateX(-50%) translateY(0); opacity: 1; } }
+@keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+
+/* ── App Shell ── */
+#__next { width: 100%; display: flex; justify-content: center; }
+
+.app-shell {
+  max-width: 480px;
+  width: 100%;
+  background: var(--bg);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 80px rgba(0,0,0,0.5);
+  isolation: isolate;
+}
+
+/* ── Typography ── */
+.font-syne { font-family: 'Syne', sans-serif; }
+button { font-family: 'DM Sans', sans-serif; cursor: pointer; }
+input, textarea, select { font-family: 'DM Sans', sans-serif; }
+
+/* ── Overlay / Modal ── */
+.overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 99999;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.sheet {
+  width: 100%;
+  max-width: 480px;
+  background: var(--white);
+  border-radius: 24px 24px 0 0;
+  padding: 20px 20px 40px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.28s cubic-bezier(.34,1.56,.64,1);
+}
+
+.sheet-handle {
+  width: 40px; height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin: 0 auto 18px;
+}
+
+/* ── Toast ── */
+.toast {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999999;
+  border-radius: 20px;
+  padding: 10px 22px;
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  white-space: nowrap;
+  animation: slideDown 0.3s ease;
+  max-width: 440px;
+}
+
+/* ── Buttons ── */
+.sol-btn {
+  padding: 13px 24px;
+  border-radius: 12px;
+  border: none;
+  background: var(--sol-grad);
+  color: white;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.sol-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.sol-btn:active { transform: scale(0.97); }
+.sol-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.out-btn {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: white;
+  color: var(--dark);
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.out-btn:hover { border-color: var(--primary); }
+
+/* ── Input ── */
+.inp {
+  width: 100%;
+  background: #F8F8F8;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--dark);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.inp:focus { border-color: var(--primary); }
+
+/* ── Wallet btn ── */
+.wallet-btn {
+  background: #F8F8F8;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  transition: border-color 0.2s, transform 0.15s, background 0.2s;
+}
+.wallet-btn:hover { border-color: var(--primary); background: #FAF5FF; transform: translateY(-1px); }
+
+/* ── Bottom Nav ── */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  background: white;
+  border-top: 1.5px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  z-index: 300;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  padding: 10px 0 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+/* ── Product Card ── */
+.prod-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.prod-card:active { transform: scale(0.97); }
+
+/* ── Spinner ── */
+.spinner {
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ── Wallet adapter override — hide default button UI ── */
+.wallet-adapter-button { display: none !important; }
